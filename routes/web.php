@@ -21,16 +21,4 @@ Route::view('contact', 'contact');
 
 Route::view('about', 'about');
 
-Route::get('customers', function () {
-
-    $customers = [
-        'Mary',
-        'Sonya',
-        'Misha',
-    ];
-
-    return view('internals.customers', [
-        'customers_array' => $customers
-    ]);
-
-});
+Route::get('customers', [\App\Http\Controllers\CustomersController::class, 'list']);
