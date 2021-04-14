@@ -17,6 +17,10 @@ class CustomersController extends Controller
 
     public function store() {
 
+        $data = request()->validate([	//	https://laravel.com/docs/8.x/validation#available-validation-rules
+            'name' => 'required|min:4'
+        ]);
+
         $customer = new Customer();
         $customer->name = request('name');
         $customer->save();

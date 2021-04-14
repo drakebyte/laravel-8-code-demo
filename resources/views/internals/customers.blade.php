@@ -12,10 +12,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Name</span>
             </div>
-            <input type="text" class="form-control @if ($errors->first('name')) is-invalid @endif"
-                   placeholder="Insert name here..." aria-label="Name" aria-describedby="basic-addon1" name="name"
-                   value="{{ old('name') }}">
-            <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+            <input type="text" class="form-control @if ($errors->first('name')) is-invalid @endif" placeholder="Insert name here..." aria-label="Name" aria-describedby="basic-addon1" name="name" value="{{ old('name') }}">
+            <div class="invalid-feedback">{{ $errors->first('name') }}</div><!-- this will catch the failed validation messages -->
         </div>
 
         <button type="submit" class="btn btn-primary">Add customer</button>
