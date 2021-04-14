@@ -22,3 +22,4 @@ Route::view('contact', 'contact')->name('contact');;
 Route::view('about', 'about');
 
 Route::get('customers', [\App\Http\Controllers\CustomersController::class, 'list']);
+Route::post('customers', [\App\Http\Controllers\CustomersController::class, 'store']);
