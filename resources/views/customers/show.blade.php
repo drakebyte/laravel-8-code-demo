@@ -12,7 +12,7 @@
             <p><strong>Email </strong>{{ $customer->email }}</p>
             <p><strong>Status </strong>{{ $customer->active }}</p>
             <p><strong>Company </strong>{{ $customer->company->name }}</p>
-            <a class="btn btn-warning" href="/customers/{{ $customer->id }}/edit">Edit</a>
+            <a class="btn btn-warning" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
             @include('customers.delete')
         </div>
     </div>

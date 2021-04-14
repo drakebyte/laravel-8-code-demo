@@ -43,7 +43,7 @@ class CustomersController extends Controller
     public function update(Customer $customer)
     {
         $customer->update($this->validateRequest(request()->route('customer')->id));   //  cannot be used with static like in create
-        return redirect('customers/' . $customer->id)->with('customer-updated', ['type'=>'success', 'content'=>'Customer successfully updated']);
+        return redirect()->route('customers.show' , $customer)->with('customer-updated', ['type'=>'success', 'content'=>'Customer successfully updated']);
     }
 
     public function destroy(Customer $customer)

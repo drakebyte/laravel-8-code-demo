@@ -12,6 +12,7 @@
                 @method('PATCH')
                 @include('customers.form')
             </form>
+            @include('customers.delete')
         </div>
     </div>
 @endsection

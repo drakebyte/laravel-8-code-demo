@@ -38,4 +38,4 @@
     <div class="invalid-feedback">{{ $errors->first('company_id') }}</div>
 </div>
 
-<button type="submit" class="btn btn-success">Add customer</button>
+<button type="submit" class="btn btn-success">Submit</button>
