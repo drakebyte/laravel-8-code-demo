@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CustomersController extends Controller
 {
     public function list() {
-        $customers = Customer::all();
+        $customers = Customer::where('active', 1)->get();
 
         return view('internals.customers', [
             'customers_array' => $customers
@@ -25,6 +25,7 @@ class CustomersController extends Controller
         $customer = new Customer();
         $customer->name = request('name');
         $customer->email = request('email');
+        $customer->active = request('active');
         $customer->save();
 
         return back()->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", $customer->name)]);

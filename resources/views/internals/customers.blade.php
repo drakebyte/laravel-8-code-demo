@@ -24,6 +24,15 @@
             <div class="invalid-feedback">{{ $errors->first('email') }}</div><!-- this will catch the failed validation messages -->
         </div>
 
+        <div class="form-group mb-3 has-validation">
+            <select name="active" class="form-control @if ($errors->first('active')) is-invalid @endif" aria-label="Default select example">
+                <option selected="" disabled>Select customer status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+            <div class="invalid-feedback">{{ $errors->first('active') }}</div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Add customer</button>
 
     </form>
