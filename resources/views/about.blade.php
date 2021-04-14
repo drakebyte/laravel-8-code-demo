@@ -1,3 +1,9 @@
-<h1>About Us</h1>
+@extends('layout')
 
+@section('title')
+    About Us
+@endsection
+
+@section('content')
 <p>We are in no way bad people</p>
+@endsection
