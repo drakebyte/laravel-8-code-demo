@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CustomersController extends Controller
 {
     public function list() {
-        $customers = Customer::where('active', 1)->get();
+        $customers = Customer::active()->get();
 
         return view('internals.customers', [
             'customers_array' => $customers
@@ -20,14 +20,11 @@ class CustomersController extends Controller
         $data = request()->validate([	//	https://laravel.com/docs/8.x/validation#available-validation-rules
             'name' => 'required|min:4',
             'email' => 'required|email|unique:customers',
+            'active' => 'required',
         ]);
 
-        $customer = new Customer();
-        $customer->name = request('name');
-        $customer->email = request('email');
-        $customer->active = request('active');
-        $customer->save();
+        Customer::create($data);
 
-        return back()->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", $customer->name)]);
+        return back()->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", request()->input('name'))]);
     }
 }
