@@ -1,5 +1,7 @@
 @csrf
 
+<input type="hidden" name="url" value="{{ URL::previous() }}" />
+
 <div class="input-group mb-3 has-validation">
     <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Name</span>
