@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('contact', 'contact')->name('contact');
+Route::get('contact', [\App\Http\Controllers\ContactFormController::class, 'create'])->name('contact.create');
+Route::post('contact', [\App\Http\Controllers\ContactFormController::class, 'store'])->name('contact.store');
 
 Route::view('about', 'about');
 
