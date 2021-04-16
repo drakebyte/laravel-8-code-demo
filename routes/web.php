@@ -13,20 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('contact', [\App\Http\Controllers\ContactFormController::class, 'create'])->name('contact.create');
 Route::post('contact', [\App\Http\Controllers\ContactFormController::class, 'store'])->name('contact.store');
 
 Route::view('about', 'about');
 
 Route::resource('customers', \App\Http\Controllers\CustomersController::class);
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
