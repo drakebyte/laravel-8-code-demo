@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('contact', [\App\Http\Controllers\ContactFormController::class, 'create'])->name('contact.create');
 Route::post('contact', [\App\Http\Controllers\ContactFormController::class, 'store'])->name('contact.store');
 
-Route::view('about', 'about');
+Route::view('about', 'about')->middleware('test');
 
 Route::resource('customers', \App\Http\Controllers\CustomersController::class);
 
