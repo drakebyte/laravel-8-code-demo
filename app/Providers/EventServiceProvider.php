@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CustomerCreatedEvent;
+use App\Listeners\WelcomeNewCustomerListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        CustomerCreatedEvent::class => [   //  event that is registered to be listen to
+            WelcomeNewCustomerListener::class,      //  what listeners are listening to the event, can be multiple ToDo: create off-process queue
         ],
     ];
 

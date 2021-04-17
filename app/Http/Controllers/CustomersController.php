@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CustomerCreatedEvent;
 use App\Models\Company;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class CustomersController extends Controller
 
     public function store()
     {
-        Customer::create($this->validateRequest());	//	we can use this mass assignment shorthand if we add the fields as fillable to the model
+        $customer = Customer::create($this->validateRequest());	//	we can use this mass assignment shorthand if we add the fields as fillable to the model
+        event( new CustomerCreatedEvent($customer));
         return redirect('customers')->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", request()->input('name'))]);
     }
 
