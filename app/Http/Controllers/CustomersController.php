@@ -33,6 +33,7 @@ class CustomersController extends Controller
     {
         $customer = Customer::create($this->validateRequest());	//	we can use this mass assignment shorthand if we add the fields as fillable to the model
         event( new CustomerCreatedEvent($customer));
+        session()->flash('newcustomerlistenerhandle', ['type'=>'warning', 'content'=> sprintf("An email has been sent to: %s. This will be sent in the background, by a database job queue.", $customer->email)]);
         return redirect('customers')->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", request()->input('name'))]);
     }
 

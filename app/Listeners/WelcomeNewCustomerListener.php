@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class WelcomeNewCustomerListener
+class WelcomeNewCustomerListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -28,7 +28,6 @@ class WelcomeNewCustomerListener
     public function handle($event)
     {
         Mail::to($event->customer->email)->send(new WelcomeNewCustomerMail());
-        session()->flash('newcustomerlistenerhandle', ['type'=>'warning', 'content'=> sprintf("An email has been sent to: %s", $event->customer->email)]);
         // do the rest of the bullshit when user is created, like subscribe to newsletter, etc
     }
 }
