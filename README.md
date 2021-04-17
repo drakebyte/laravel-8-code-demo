@@ -16,5 +16,9 @@
 - run ```npm install```
 - run ```npm run dev``` until it works
 - run ```npm run watch``` to constantly compile js and css
+- to run the jobs queue ```php artisan queue:work > storage/logs/jobs.log```
+- OR to start a new php process in the background ```php artisan queue:work &```
+- we need a [supervisor](https://laravel.com/docs/8.x/queues#supervisor-configuration) to restart if it stops
   
 - [Read Documentation](https://laravel.com/docs/8.x)
+- [Coders Tape v5.8 playlist](https://www.youtube.com/playlist?list=PLpzy7FIRqpGD0kxI48v8QEVVZd744Phi4)
