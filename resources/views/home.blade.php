@@ -17,6 +17,15 @@
                     {{ __('You are logged in!') }}
                 </div>
             </div>
+
+            <hr />
+
+            <div class="card">
+                <div class="card-header">Vue component showcase</div>
+                <div class="card-body">
+                    <mybutton text="This text will be shown as the button name but will be override by axios api call" type="submit"></mybutton>
+                </div>
+            </div>
         </div>
     </div>
 </div>
