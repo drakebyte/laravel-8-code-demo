@@ -18,7 +18,7 @@
 
     @if($customer->image)
         <div class="col-6">
-            <img src="{{ asset('storage/' . $customer->image) }}" alt="" class="img-thumbnail">
+            <img src="{{ asset('storage/' . $customer->image) }}" alt="" width="300" class="img-thumbnail">
         </div>
     @endif
     </div>

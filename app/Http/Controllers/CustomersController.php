@@ -8,6 +8,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CustomersController extends Controller
 {
@@ -70,19 +71,13 @@ class CustomersController extends Controller
 
     private function validateRequest($exception_id = '0')
     {
-        return tap(request()->validate([
+        return request()->validate([
                 'name' => 'required|min:3',
                 'email' => 'required|email|unique:customers,email,' . $exception_id,
                 'active' => 'required',
                 'company_id' => 'required',
-            ]), function () {
-
-                if (request()->hasFile('image')) {
-                    request()->validate([
-                        'image' => 'file|image|max:5000',
-                    ]);
-                }
-        });
+                'image' => 'sometimes|file|image|max:5000',
+            ]);
     }
 
     private function storeImage($customer)
@@ -91,6 +86,9 @@ class CustomersController extends Controller
             $customer->update([
                 'image' => request()->image->store('uploads', 'public'),
             ]);
+
+            $image = Image::make(public_path('storage/' . $customer->image))->fit(300, 300, null, 'center');
+            $image->save();
         }
     }
 }
