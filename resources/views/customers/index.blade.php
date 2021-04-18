@@ -40,4 +40,10 @@
             </div>
         </div>
     @endforeach
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center pt-4">
+            {{ $customers->links() }}
+        </div>
+    </div>
 @endsection
