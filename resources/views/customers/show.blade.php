@@ -16,10 +16,10 @@
             @include('customers.delete')
         </div>
 
-    @if($customer->image)
-        <div class="col-6">
-            <img src="{{ asset('storage/' . $customer->image) }}" alt="" width="300" class="img-thumbnail">
-        </div>
-    @endif
+        @if($customer->image)
+            <div class="col-6">
+                <img src="{{ asset('storage/' . $customer->image) }}" alt="" width="300" class="img-thumbnail">
+            </div>
+        @endif
     </div>
 @endsection

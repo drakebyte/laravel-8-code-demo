@@ -6,9 +6,9 @@
 
 @section('content')
 
-{{--    @can('create', App\Customer::class)--}}
-        <a class="btn btn-warning btn-block" href="{{ route('customers.create') }}">Create new customer</a>
-{{--    @endcan--}}
+    {{--    @can('create', App\Customer::class)--}}
+    <a class="btn btn-warning btn-block" href="{{ route('customers.create') }}">Create new customer</a>
+    {{--    @endcan--}}
 
     <hr/>
 

@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\CustomerCreatedEvent;
 use App\Models\Company;
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class CustomersController extends Controller
@@ -27,18 +25,18 @@ class CustomersController extends Controller
 
     public function create()
     {
-        $customer = new Customer();
+        $customer  = new Customer();
         $companies = Company::all();
         return view("customers.create", compact('companies', 'customer'));
     }
 
     public function store()
     {
-        $customer = Customer::create($this->validateRequest());	//	we can use this mass assignment shorthand if we add the fields as fillable to the model
+        $customer = Customer::create($this->validateRequest());    //	we can use this mass assignment shorthand if we add the fields as fillable to the model
         $this->storeImage($customer);
-        event( new CustomerCreatedEvent($customer));
-        session()->flash('newcustomerlistenerhandle', ['type'=>'warning', 'content'=> sprintf("An email has been sent to: %s. This will be sent in the background, by a database job queue.", $customer->email)]);
-        return redirect('customers')->with('customer-created', ['type'=>'success', 'content'=> sprintf("Customer successfully created: %s", request()->input('name'))]);
+        event(new CustomerCreatedEvent($customer));
+        session()->flash('newcustomerlistenerhandle', ['type' => 'warning', 'content' => sprintf("An email has been sent to: %s. This will be sent in the background, by a database job queue.", $customer->email)]);
+        return redirect('customers')->with('customer-created', ['type' => 'success', 'content' => sprintf("Customer successfully created: %s", request()->input('name'))]);
     }
 
     public function show(Customer $customer)   //  controller binding
@@ -57,27 +55,27 @@ class CustomersController extends Controller
         $customer->update($this->validateRequest(request()->route('customer')->id));   //  cannot be used with static like in create
         $this->storeImage($customer);
         //ToDo: remove old image from storage
-//        return redirect()->route('customers.show' , $customer)->with('customer-updated', ['type'=>'success', 'content'=>'Customer successfully updated']);    //  redirect with parameter
-        return redirect(request()->input('url'))->with('customer-updated', ['type'=>'success', 'content'=>'Customer successfully updated']);    //  redirect to original url
+        //return redirect()->route('customers.show' , $customer)->with('customer-updated', ['type'=>'success', 'content'=>'Customer successfully updated']);    //  redirect with parameter
+        return redirect(request()->input('url'))->with('customer-updated', ['type' => 'success', 'content' => 'Customer successfully updated']);    //  redirect to original url
     }
 
     public function destroy(Customer $customer)
     {
-        $avatar = public_path ('storage/' . $customer->image);
+        $avatar = public_path('storage/' . $customer->image);
         File::delete($avatar);
         $customer->delete();
-        return redirect('customers')->with('customer-deleted', ['type'=>'success', 'content'=>'Customer successfully deleted']);
+        return redirect('customers')->with('customer-deleted', ['type' => 'success', 'content' => 'Customer successfully deleted']);
     }
 
     private function validateRequest($exception_id = '0')
     {
         return request()->validate([
-                'name' => 'required|min:3',
-                'email' => 'required|email|unique:customers,email,' . $exception_id,
-                'active' => 'required',
-                'company_id' => 'required',
-                'image' => 'sometimes|file|image|max:5000',
-            ]);
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:customers,email,' . $exception_id,
+            'active' => 'required',
+            'company_id' => 'required',
+            'image' => 'sometimes|file|image|max:5000',
+        ]);
     }
 
     private function storeImage($customer)

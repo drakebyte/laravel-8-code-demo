@@ -9,8 +9,8 @@ class TestVueController extends Controller
     public function index()
     {
         return [
-            'name'=>'Vue button name from controller json',
-            'type'=>'submit',
+            'name' => 'Vue button name from controller json',
+            'type' => 'submit',
         ];
     }
 }

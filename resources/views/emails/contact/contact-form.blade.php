@@ -1,14 +1,14 @@
 @component('mail::message')
-# Introduction
+    # Introduction
 
-{{ $data['name'] }} has sent you an email.
+    {{ $data['name'] }} has sent you an email.
 
-{{ $data['message'] }}
+    {{ $data['message'] }}
 
-@component('mail::button', ['url' => ''])
-    Click for disappointment
-@endcomponent
+    @component('mail::button', ['url' => ''])
+        Click for disappointment
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

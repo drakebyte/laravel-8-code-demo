@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-<p>We are in no way bad people</p>
+    <p>We are in no way bad people</p>
 @endsection
