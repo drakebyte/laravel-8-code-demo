@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('customers.update', $customer) }}" method="POST">
+            <form action="{{ route('customers.update', $customer) }}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')
                 @include('customers.form')
             </form>

@@ -40,4 +40,10 @@
     <div class="invalid-feedback">{{ $errors->first('company_id') }}</div>
 </div>
 
+<div class="form-group d-flex flex-column  has-validation">
+    <label for="image">Profile Image</label>
+    <input type="file" name="image" class="py-2">
+    <div class="invalid-feedback">{{ $errors->first('image') }}</div>
+</div>
+
 <button type="submit" class="btn btn-success">Submit</button>
