@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Phone;
+use App\Models\Role;
 use App\Models\User;
 use Faker\Factory;
 
@@ -26,5 +27,16 @@ class UserController extends Controller
             $user->phone->update(['number' => Factory::create()->phoneNumber]);
             dump($user->phone->number);
         }
+    }
+
+    public function attachRoles()
+    {
+
+        $user = User::with('roles')->findOrFail(1);
+        $roles = Role::all();
+
+        $user->roles()->sync($roles);   //  https://laravel.com/docs/8.x/eloquent-relationships#syncing-associations
+
+        dd($roles);
     }
 }

@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function phone() {
         return $this->hasOne(Phone::class);
     }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
 }

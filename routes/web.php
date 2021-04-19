@@ -25,3 +25,4 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('set-my-phone', [\App\Http\Controllers\UserController::class, 'randomizePhone']);
+Route::get('attach-my-roles', [\App\Http\Controllers\UserController::class, 'attachRoles']);
