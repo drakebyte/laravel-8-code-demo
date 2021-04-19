@@ -6,9 +6,9 @@
 
 @section('content')
 
-    {{--    @can('create', App\Customer::class)--}}
-    <a class="btn btn-warning btn-block" href="{{ route('customers.create') }}">Create new customer</a>
-    {{--    @endcan--}}
+    @can('create', App\Customer::class)
+        <a class="btn btn-warning btn-block" href="{{ route('customers.create') }}">Create new customer</a>
+    @endcan
 
     <hr/>
 
@@ -34,9 +34,13 @@
             <div class="col-3">{{ $customer->company->name }}</div>
             <div class="col-1">{{ $customer->active }}</div>
             <div class="col-3 text-right">
-                <a class="btn btn-success" href="{{ route('customers.show', ['customer' => $customer]) }}">View</a>
-                <a class="btn btn-warning" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
-                @include('customers.delete')
+                @can('view', $customer)
+                    <a class="btn btn-success" href="{{ route('customers.show', ['customer' => $customer]) }}">View</a>
+                @endcan
+                @can('create', App\Customer::class)
+                    <a class="btn btn-warning" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
+                    @include('customers.delete')
+                @endcan
             </div>
         </div>
     @endforeach

@@ -12,8 +12,10 @@
             <p><strong>Email </strong>{{ $customer->email }}</p>
             <p><strong>Status </strong>{{ $customer->active }}</p>
             <p><strong>Company </strong>{{ $customer->company->name }}</p>
-            <a class="btn btn-warning" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
-            @include('customers.delete')
+            @can('create', App\Customer::class)
+                <a class="btn btn-warning" href="{{ route('customers.edit', ['customer' => $customer]) }}">Edit</a>
+                @include('customers.delete')
+            @endcan
         </div>
 
         @if($customer->image)

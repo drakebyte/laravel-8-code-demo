@@ -14,6 +14,7 @@ class CustomersController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('can:view,customer')->only(['show']); //  only show single page to users with "view" policy (permission)
     }
 
     public function index()
@@ -32,6 +33,7 @@ class CustomersController extends Controller
 
     public function store()
     {
+        $this->authorize('create', Customer::class);    //  instead of middleware (in route or constructor) we can also use thus
         $customer = Customer::create($this->validateRequest());    //	we can use this mass assignment shorthand if we add the fields as fillable to the model
         $this->storeImage($customer);
         event(new CustomerCreatedEvent($customer));
@@ -52,6 +54,7 @@ class CustomersController extends Controller
 
     public function update(Customer $customer)
     {
+        $this->authorize('create', Customer::class);
         $customer->update($this->validateRequest(request()->route('customer')->id));   //  cannot be used with static like in create
         $this->storeImage($customer);
         //ToDo: remove old image from storage
@@ -61,6 +64,7 @@ class CustomersController extends Controller
 
     public function destroy(Customer $customer)
     {
+        $this->authorize('create', Customer::class);
         $avatar = public_path('storage/' . $customer->image);
         File::delete($avatar);
         $customer->delete();
