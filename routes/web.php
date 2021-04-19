@@ -23,3 +23,5 @@ Route::resource('customers', \App\Http\Controllers\CustomersController::class);
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('set-my-phone', [\App\Http\Controllers\UserController::class, 'randomizePhone']);
